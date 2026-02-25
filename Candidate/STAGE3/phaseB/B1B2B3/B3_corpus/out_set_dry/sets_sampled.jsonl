@@ -1,0 +1,2 @@
+{"seed_i": 2609, "seed_hpo": "HP:0003537", "k": 3, "idx": [2609, 1619, 7575], "hpos": ["HP:0003537", "HP:0002149", "HP:0010910"], "clusters": [3, 3, 3], "n_same_cluster": 3, "n_cross_cluster": 0}
+{"seed_i": 4045, "seed_hpo": "HP:0005871", "k": 3, "idx": [4045, 4316, 1978], "hpos": ["HP:0005871", "HP:0006375", "HP:0002656"], "clusters": [2, 2, 2], "n_same_cluster": 3, "n_cross_cluster": 0}

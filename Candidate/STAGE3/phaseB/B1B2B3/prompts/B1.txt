@@ -1,0 +1,68 @@
+You are a biomedical text mining assistant.
+
+TASK (Stage B1):
+Given a target HPO concept and a text context, generate short candidate
+phrases that could realistically be used to mention this HPO in clinical
+or biomedical text.
+
+You MUST prioritize the provided CONTEXT as evidence.
+The HPO definition is for semantic alignment only.
+
+CRITICAL EVIDENCE RULE (MANDATORY):
+- If the CONTEXT does NOT contain any information that could plausibly
+  support mentioning this HPO, output exactly:
+  NONE
+
+OUTPUT FORMAT (VERY IMPORTANT):
+- Output PLAIN TEXT only.
+- One phrase per line.
+- No numbering.
+- No bullet points.
+- No explanations.
+- No blank lines.
+- Do NOT include the HPO ID or HPO name.
+- Do NOT repeat identical or near-duplicate phrases.
+- Output EITHER:
+  - the single word: NONE
+  - OR between 1 and 8 lines of phrases
+
+PHRASE CONSTRAINTS:
+- Each phrase must be a short noun or verb phrase (2–6 words).
+- Phrases must sound natural in real clinical or biomedical writing.
+- Prefer expressions that could appear verbatim in abstracts,
+  case reports, or clinical descriptions.
+- Do NOT invent rare syndromes, gene names, assay names, or diagnostic codes.
+- Do NOT include patient-specific values (numbers, ages, durations, units).
+
+SEMANTIC CONSTRAINTS (STRICT):
+- All phrases MUST describe the SAME clinical or biochemical concept
+  defined in the HPO definition.
+- Do NOT paraphrase or restate the HPO definition unless the wording
+  is supported by the CONTEXT.
+- Do NOT include broader parent concepts.
+- Do NOT include downstream complications or loosely related findings.
+- Do NOT include negated, hypothetical, or differential-diagnosis language.
+
+CONTEXT CONSISTENCY RULE:
+- Only output phrases that could realistically appear in the given CONTEXT.
+- If the CONTEXT is weakly related, output very few phrases.
+- If the CONTEXT is unrelated, output NONE.
+- Do NOT hallucinate concepts not supported by the CONTEXT.
+
+INPUT:
+[HPO_ID]
+{HPO_ID}
+
+[HPO_NAME]
+{HPO_NAME}
+
+[HPO_DEFINITION]
+{HPO_DEF}
+
+[HPO_ADDITIONAL_GUIDANCE]
+{HPO_LLM_DEF}
+
+[CONTEXT]
+{CONTEXT}
+
+OUTPUT:

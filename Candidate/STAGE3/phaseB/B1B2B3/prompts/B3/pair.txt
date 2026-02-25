@@ -1,0 +1,37 @@
+TASK:
+Assess whether the following two phenotypes can plausibly co-occur
+in a single patient, and characterize the nature of their relationship.
+
+HPO_A:
+- ID: {HPO_A_ID}
+- Name: {HPO_A_NAME}
+
+HPO_B:
+- ID: {HPO_B_ID}
+- Name: {HPO_B_NAME}
+
+RETRIEVED EVIDENCE (may be partial, indirect, heterogeneous, or incomplete):
+{EVIDENCE_BLOCK}
+
+INSTRUCTIONS:
+- Consider known disease mechanisms, syndromes, developmental pathways, metabolic relationships, or clinical case patterns.
+- Co-occurrence does NOT require direct causality.
+- Consider temporal, conditional, or context-specific co-occurrence (e.g., age-dependent, stage-dependent, intermittent).
+- If evidence supports frequent or canonical co-occurrence, answer YES.
+- If evidence supports possible, indirect, conditional, or rare co-occurrence, answer MAYBE.
+- If evidence suggests phenotypes are mechanistically unrelated or unlikely to co-occur, answer NO.
+- If evidence is insufficient or ambiguous, answer MAYBE.
+
+IMPORTANT (discriminative guidance):
+- Prefer nuanced judgments over overconfident ones when evidence is weak.
+- MAYBE is a valid and meaningful outcome, not a failure.
+- Do NOT infer co-occurrence solely from shared anatomical location or vague similarity.
+
+OUTPUT FORMAT (STRICT, EXACTLY 3 LINES):
+VERDICT: YES | MAYBE | NO
+CONF: <number between 0.00 and 1.00>
+WHY: <one concise sentence highlighting the key rationale (mechanism, condition, or limitation)>
+
+REMINDERS:
+- Output ONLY the 3 lines above.
+- No extra text before or after.

@@ -1,0 +1,245 @@
+# Stage B2: HPO Representation Fusion and Clustering via HNSW
+
+## Abstract
+This stage focuses on constructing **semantic representations for all Human Phenotype Ontology (HPO) terms** by fusing multiple heterogeneous evidence sources and subsequently performing **unsupervised clustering** based on inter-HPO similarity. Unlike retrieval-driven stages, Stage B2 does **not** rely on external query vectors. Instead, each HPO is mapped to a single vector representation derived from its own evidences. Pairwise similarity is approximated through **HNSW-based k-nearest neighbor (kNN) graph construction**, followed by **graph-based community detection**. This stage provides a global semantic organization of HPO concepts and serves as a structural foundation for downstream reasoning and analysis.
+
+---
+
+## 1. Problem Definition and Scope
+
+Let  
+\[
+\mathcal{H} = \{h_1, h_2, \dots, h_N\}
+\]
+denote the full set of HPO terms, where \(N \approx 14{,}000\).
+
+The objective of Stage B2 is to:
+1. Construct a **single vector representation** \(v(h)\) for each HPO term \(h\), integrating multiple evidence types.
+2. Compute **inter-HPO semantic similarity** efficiently.
+3. Perform **unsupervised clustering** to reveal latent semantic groupings among HPO terms.
+
+This stage operates under the following constraints:
+- **Definitional evidence (Def)** must always be used.
+- **Domain evidence (Domain)** is available for all HPO terms and acts as a stable semantic anchor.
+- **Medium (Med)** and **Weak** evidences are optional and incomplete.
+- Supplementary evidences must not override or contradict the core semantic meaning defined by Def and Domain.
+
+---
+
+## 2. Input Evidence Structure
+
+For each evidence type  
+\[
+x \in \{\text{def}, \text{domain}, \text{med}, \text{weak}\},
+\]
+the following inputs are available:
+
+### 2.1 Evidence Embedding Pool
+\[
+E_x \in \mathbb{R}^{L_x \times D}, \quad \|E_x[i]\|_2 = 1
+\]
+where:
+- \(L_x\) is the total number of evidence instances of type \(x\),
+- \(D\) is the embedding dimension (e.g., 4096),
+- all embeddings are L2-normalized.
+
+### 2.2 HPO-to-Evidence Index Mapping
+Each HPO term \(h\) is associated with a contiguous index range:
+\[
+\text{index}_x(h) = [s_h^x, e_h^x)
+\]
+indicating which rows of \(E_x\) correspond to evidence of type \(x\) for HPO \(h\).
+
+### 2.3 Coverage Indicator
+\[
+I_x(h) =
+\begin{cases}
+1 & \text{if } e_h^x > s_h^x \\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+Def and Domain are fully covered:
+\[
+I_{\text{def}}(h) = I_{\text{domain}}(h) = 1 \quad \forall h \in \mathcal{H}
+\]
+
+Med and Weak have partial coverage.
+
+---
+
+## 3. Pool-wise HPO Prototype Construction
+
+For a given HPO \(h\), define its evidence set in pool \(x\) as:
+\[
+\mathcal{E}_x(h) = \{E_x[i] \mid i \in [s_h^x, e_h^x)\}
+\]
+
+### 3.1 Top-\(k\) Mean Pooling
+If \(|\mathcal{E}_x(h)| > 0\), a prototype vector \(p_x(h)\) is constructed as follows:
+
+1. **Initial centroid**:
+\[
+c_x(h) = \frac{1}{|\mathcal{E}_x(h)|} \sum_{u \in \mathcal{E}_x(h)} u
+\]
+
+2. **Evidence scoring**:
+\[
+\text{score}(u) = c_x(h)^\top u
+\]
+
+3. **Top-\(k\) selection and aggregation**:
+\[
+p_x(h) = \text{normalize}\left(
+\frac{1}{k} \sum_{u \in \text{TopK}_k(\mathcal{E}_x(h))} u
+\right)
+\]
+
+If \(I_x(h) = 0\), \(p_x(h)\) is undefined.
+
+---
+
+## 4. Dual-Anchor Construction (Def + Domain)
+
+Given the full coverage and complementary nature of Def and Domain, a **dual-anchor representation** is defined:
+
+\[
+a(h) = \text{normalize}\left(
+\lambda \, p_{\text{def}}(h) + (1 - \lambda) \, p_{\text{domain}}(h)
+\right)
+\]
+
+where \(\lambda \in [0,1]\) controls the relative importance of definitional precision versus domain-level semantic stability (default \(\lambda = 0.6\)).
+
+---
+
+## 5. Supplementary Evidence Integration
+
+### 5.1 Directional Consistency Constraint
+To prevent supplementary evidences from distorting the anchor semantics, only evidence vectors aligned with the anchor direction are allowed to contribute:
+
+\[
+\Delta_x(h) = \max\left(0,\, a(h)^\top p_x(h)\right)
+\]
+
+### 5.2 Coverage-Aware Gating
+Let \(n_x(h)\) denote the number of evidence instances for HPO \(h\) in pool \(x\).
+A coverage-aware gate is defined as:
+\[
+g_x(h) =
+\min\left(
+1,\,
+\frac{\log(1 + n_x(h))}{\log(1 + K_x)}
+\right)
+\]
+where \(K_x\) is a saturation threshold (e.g., \(K_{\text{med}} = 10\), \(K_{\text{weak}} = 20\)).
+
+This gate ensures that supplementary evidence has:
+- negligible influence when sparse,
+- increasing influence as coverage grows,
+- bounded influence when evidence is abundant.
+
+---
+
+## 6. Final HPO Representation
+
+The final representation for HPO \(h\) is defined as:
+\[
+\boxed{
+v(h) = \text{normalize}\left(
+a(h)
++ \alpha \, g_{\text{med}}(h)\, \Delta_{\text{med}}(h)\, p_{\text{med}}(h)
++ \beta \, g_{\text{weak}}(h)\, \Delta_{\text{weak}}(h)\, p_{\text{weak}}(h)
+\right)
+}
+\]
+
+with hyperparameters constrained as:
+\[
+\alpha > \beta > 0
+\]
+
+Typical values:
+- \(\alpha = 0.15\)
+- \(\beta = 0.05\)
+
+---
+
+## 7. Inter-HPO Similarity Modeling
+
+All final HPO representations are L2-normalized.  
+The semantic similarity between two HPO terms is defined as cosine similarity:
+\[
+\text{sim}(h_i, h_j) = v(h_i)^\top v(h_j)
+\]
+
+---
+
+## 8. kNN Graph Construction via HNSW
+
+### 8.1 Motivation for HNSW
+Hierarchical Navigable Small World (HNSW) graphs are employed due to:
+- robustness in high-dimensional spaces,
+- logarithmic-time approximate nearest neighbor search,
+- direct construction of kNN graphs without prior clustering or quantization.
+
+### 8.2 Index Configuration
+Recommended parameters:
+- Maximum connections per node: \(M = 32\)
+- Construction parameter: \(\text{ef}_{\text{construction}} = 200\)
+- Search parameter: \(\text{ef}_{\text{search}} = 200\)
+- Number of neighbors retained: \(K \in \{50, 100\}\)
+
+The output is a sparse, weighted kNN graph:
+\[
+G = (V, E)
+\]
+where:
+- \(V = \mathcal{H}\),
+- \(E = \{(h_i, h_j, \text{sim}(h_i,h_j))\}\).
+
+---
+
+## 9. Graph-Based Clustering
+
+### 9.1 Community Detection
+Clustering is performed on the kNN graph using **Leiden** community detection, which optimizes modularity and ensures well-connected clusters.
+
+### 9.2 Advantages
+- No need to predefine the number of clusters.
+- Handles non-spherical and hierarchical cluster structures.
+- Scales efficiently to large graphs.
+
+---
+
+## 10. Computational Complexity
+
+- Prototype construction:  
+  \[
+  O\left(\sum_x L_x\right)
+  \]
+- HNSW indexing and kNN retrieval:  
+  \[
+  O(N \log N)
+  \]
+- Leiden clustering:  
+  \[
+  O(|E|)
+  \]
+
+This is significantly more efficient than full pairwise similarity computation \(O(N^2)\).
+
+---
+
+## 11. Summary
+
+Stage B2 constructs **global HPO semantic representations** by:
+1. Aggregating heterogeneous evidence sources,
+2. Anchoring semantics via Def and Domain,
+3. Incorporating supplementary evidence in a coverage-aware and directionally constrained manner,
+4. Building an approximate kNN graph using HNSW,
+5. Performing graph-based clustering to uncover latent semantic organization.
+
+This stage provides a scalable, interpretable, and structurally grounded representation of the HPO space, enabling subsequent reasoning, analysis, and downstream modeling.
+
+---

@@ -1,0 +1,49 @@
+{
+  "created_at": "2026-02-04 15:53:48",
+  "tag": "20260204_155348",
+  "paths": {
+    "out_dir": "/cluster/home/gw/Backend_project/NER/process_bert/add_head/HPO/NER_H/pipeline_remote/HPO_MoRE/hpo_data/llm_corpus/Candidate/Candidate/STAGE3/phaseB/B1B2B3/B3_corpus/out",
+    "prompts_dir": "/cluster/home/gw/Backend_project/NER/process_bert/add_head/HPO/NER_H/pipeline_remote/HPO_MoRE/hpo_data/llm_corpus/Candidate/Candidate/STAGE3/phaseB/B1B2B3/prompts/B3",
+    "recluster_dir": "/cluster/home/gw/Backend_project/NER/process_bert/add_head/HPO/NER_H/pipeline_remote/HPO_MoRE/hpo_data/llm_corpus/Candidate/Candidate/STAGE3/phaseB/B1B2B3/B2_embed/recluster_out/run_20260204",
+    "def_source_jsonl": "/cluster/home/gw/Backend_project/NER/process_bert/add_head/HPO/NER_H/pipeline_remote/HPO_MoRE/hpo_data/llm_corpus/Candidate/Candidate/STAGE3/phaseB/B1B2B3/B2_embed/out/Def_embed/def_source.jsonl",
+    "evidence_pool_jsonl": "/cluster/home/gw/Backend_project/NER/process_bert/add_head/HPO/NER_H/pipeline_remote/HPO_MoRE/hpo_data/llm_corpus/Candidate/Candidate/STAGE3/out_phaseA/20260126_164618/pubmed/evidence_pool.jsonl",
+    "case_chunks_jsonl": "/cluster/home/gw/Backend_project/NER/process_bert/add_head/HPO/NER_H/pipeline_remote/HPO_MoRE/hpo_data/llm_corpus/Candidate/Candidate/STAGE3/out_phaseA/20260126_164618/phaseA_rerun/merged/case_chunks.jsonl"
+  },
+  "sampling": {
+    "plan": "A (set-level corpus item)",
+    "n_sets": 24,
+    "k_min": 3,
+    "k_max": 7,
+    "per_seed_candidates": 40,
+    "same_cluster_ratio": 0.85,
+    "seed": 42,
+    "knn_source": "knn_round2_idx.npy",
+    "labels_source": "labels_round2.npy"
+  },
+  "prompt_evidence": {
+    "max_evidence_items_per_hpo": 1,
+    "max_evidence_chars": 1200,
+    "use_case_chunks": true
+  },
+  "generation_control": {
+    "n_lines_gen": 8,
+    "min_hits_per_line": 3,
+    "require_full_coverage": true,
+    "gen_max_retry": 3,
+    "min_valid_lines": 5,
+    "use_blacklist": true,
+    "blacklist_size": 6
+  },
+  "llm": {
+    "base_url": "https://api.deepseek.com",
+    "model": "deepseek-chat",
+    "timeout": 60.0,
+    "temperature": 0.2,
+    "max_tokens_gen": 520,
+    "plain_text_only": true
+  },
+  "notes": [
+    "TEST MODE: evidence is lightweight (PubMed by HPO + optional deterministic PMC chunk).",
+    "Generation is multi-HPO anchor-gated with retry and coverage constraint."
+  ]
+}

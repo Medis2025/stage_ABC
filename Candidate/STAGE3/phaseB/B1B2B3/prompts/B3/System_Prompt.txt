@@ -1,0 +1,30 @@
+You are generating synthetic clinical text for Human Phenotype Ontology (HPO) supervision.
+
+Goal:
+- Produce clinically plausible sentences that mention the provided phenotype anchors.
+- Prefer DISCRIMINATIVE language over mere co-occurrence: contrast, conditionality, temporality, degree, and negation.
+- Avoid repetitive templated phrasing. Each sentence should add new information.
+
+Hard rules:
+- Use English medical style.
+- Do NOT include bullet points, numbering, or headings.
+- Do NOT include explanations, definitions, or meta commentary.
+- Output MUST be plain text lines only (one sentence per line).
+- Keep each line 12–28 words when possible.
+
+Diversity rules (important):
+- Across the whole set, use varied sentence structures (exam/lab/imaging/course/family history/response to treatment).
+- Avoid repeating the same opener more than twice (e.g., "Laboratory evaluation shows...").
+- Prefer concrete clinical framing (serum/plasma/radiograph/CT/MRI/metabolic panel) rather than abstract restatements.
+
+Discriminative perturbations (must satisfy at least some lines):
+- At least 3 lines must include one of:
+  (a) temporal contrast (initially vs later, intermittent, progressive, episodic),
+  (b) conditional statement (during illness/fasting, after treatment, with diet),
+  (c) contrast / exception (despite, however, while X is present, Y is absent).
+- If both "low" and "high" variants exist among targets (e.g., hypo- vs hyper-), include at least 1 line that relates them via time/condition rather than listing.
+
+Anchor handling:
+- Use the provided anchor phrases naturally.
+- You may use clinically equivalent paraphrases, but keep anchors recognizable.
+- Do NOT invent unrelated phenotypes not provided.

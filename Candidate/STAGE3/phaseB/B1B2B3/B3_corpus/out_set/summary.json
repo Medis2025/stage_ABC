@@ -1,0 +1,28 @@
+{
+  "created_at": "2026-02-05 17:01:45",
+  "n_sets_sampled": 24,
+  "n_seen_new": 0,
+  "n_skipped_resume": 24,
+  "n_written": 0,
+  "generation_counts": {
+    "gen_ok": 0,
+    "gen_fail": 0,
+    "avg_attempts_over_seen": 0.0
+  },
+  "coverage_stats": {
+    "mean_coverage_ratio_valid": 0.0,
+    "n_items_with_cov": 0
+  },
+  "paths": {
+    "config": "/cluster/home/gw/Backend_project/NER/process_bert/add_head/HPO/NER_H/pipeline_remote/HPO_MoRE/hpo_data/llm_corpus/Candidate/Candidate/STAGE3/phaseB/B1B2B3/B3_corpus/out_set/B3_run_config.json",
+    "sets_sampled": "/cluster/home/gw/Backend_project/NER/process_bert/add_head/HPO/NER_H/pipeline_remote/HPO_MoRE/hpo_data/llm_corpus/Candidate/Candidate/STAGE3/phaseB/B1B2B3/B3_corpus/out_set/sets_sampled.jsonl",
+    "corpus_generated": "/cluster/home/gw/Backend_project/NER/process_bert/add_head/HPO/NER_H/pipeline_remote/HPO_MoRE/hpo_data/llm_corpus/Candidate/Candidate/STAGE3/phaseB/B1B2B3/B3_corpus/out_set/corpus_generated.jsonl",
+    "failures": "/cluster/home/gw/Backend_project/NER/process_bert/add_head/HPO/NER_H/pipeline_remote/HPO_MoRE/hpo_data/llm_corpus/Candidate/Candidate/STAGE3/phaseB/B1B2B3/B3_corpus/out_set/failures.jsonl",
+    "summary": "/cluster/home/gw/Backend_project/NER/process_bert/add_head/HPO/NER_H/pipeline_remote/HPO_MoRE/hpo_data/llm_corpus/Candidate/Candidate/STAGE3/phaseB/B1B2B3/B3_corpus/out_set/summary.json"
+  },
+  "modes": {
+    "dry_run": false,
+    "resume": true,
+    "write_only_gen_ok": false
+  }
+}

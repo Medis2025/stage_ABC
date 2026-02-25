@@ -1,0 +1,15 @@
+{
+  "created_at": "2026-02-04 15:58:17",
+  "n_sets": 24,
+  "generation_counts": {
+    "items_total": 24,
+    "gen_ok": 10,
+    "gen_fail": 14,
+    "avg_attempts": 2.25
+  },
+  "paths": {
+    "config": "/cluster/home/gw/Backend_project/NER/process_bert/add_head/HPO/NER_H/pipeline_remote/HPO_MoRE/hpo_data/llm_corpus/Candidate/Candidate/STAGE3/phaseB/B1B2B3/B3_corpus/out/B3_run_config.json",
+    "sets_sampled": "/cluster/home/gw/Backend_project/NER/process_bert/add_head/HPO/NER_H/pipeline_remote/HPO_MoRE/hpo_data/llm_corpus/Candidate/Candidate/STAGE3/phaseB/B1B2B3/B3_corpus/out/sets_sampled.jsonl",
+    "corpus_generated": "/cluster/home/gw/Backend_project/NER/process_bert/add_head/HPO/NER_H/pipeline_remote/HPO_MoRE/hpo_data/llm_corpus/Candidate/Candidate/STAGE3/phaseB/B1B2B3/B3_corpus/out/corpus_generated.jsonl"
+  }
+}

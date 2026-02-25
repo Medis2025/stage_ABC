@@ -1,0 +1,52 @@
+TASK:
+Generate clinical-style sentences describing how the following phenotypes
+can plausibly co-occur in the same patient presentation.
+
+The descriptions should reflect co-existing abnormalities in realistic
+clinical contexts, without implying causality or a specific diagnosis.
+
+PHENOTYPE A:
+- ID: {HPO_A_ID}
+- Name: {HPO_A_NAME}
+
+PHENOTYPE B:
+- ID: {HPO_B_ID}
+- Name: {HPO_B_NAME}
+
+EVIDENCE CONTEXT (may be partial, indirect, or incomplete):
+{EVIDENCE_BLOCK}
+
+INSTRUCTIONS:
+- Generate multiple alternative clinical descriptions referring to the same patient.
+- Each sentence must independently be clinically plausible.
+- Explicitly reflect the medical meaning of BOTH phenotypes in each sentence.
+- Integrate both phenotypes naturally within a single clinical statement.
+- Use appropriate clinical, laboratory, imaging, or developmental language when relevant.
+- Avoid causal claims; describe co-occurrence only.
+- Do NOT imply a specific disease, syndrome, or diagnosis.
+- Do NOT introduce any additional phenotypes, findings, or symptoms.
+- Do NOT replace the phenotypes with vague or generic expressions.
+- Do NOT copy or quote the evidence text verbatim; paraphrase instead.
+- Do NOT mention HPO IDs, ontology terms, or literature sources.
+
+DISCRIMINATIVE WRITING REQUIREMENTS (IMPORTANT):
+- Across the full set of sentences, include AT LEAST {MIN_DISCRIMINATIVE_LINES} lines
+  that use one of the following devices:
+    • temporal variation (e.g., initially, later, intermittent, progressive, on repeat testing)
+    • conditional context (e.g., during fasting, after treatment, with age, under metabolic stress)
+    • contrast or exception (e.g., while X is present, Y is absent; despite X, Y persists)
+- Prefer nuanced or conditional co-occurrence over simple parallel listing.
+- Avoid repeating the same sentence structure or clinical framing across lines.
+- Do NOT produce multiple near-paraphrases that differ only by synonyms.
+
+STYLE CONSTRAINTS:
+- Use professional clinical narrative style.
+- Prefer concrete contexts (serum/plasma levels, imaging findings, follow-up evaluation).
+- Avoid overly generic openings (e.g., do not start most lines with "The patient has...").
+
+OUTPUT FORMAT:
+- One complete clinical sentence per line.
+- No numbering.
+- No bullet points.
+- No empty lines.
+- Generate exactly {N} lines.
