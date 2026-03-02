@@ -42,7 +42,7 @@ Construct phenotype-specific evidence pools grounded in biomedical literature us
 
 ## 2.2 Input
 
-For each phenotype $ h $:
+For each phenotype $h$:
 
 * HPO ID
 * Canonical name
@@ -107,7 +107,7 @@ Extraction strategies:
 Each candidate span is evaluated via an LLM-based support classifier:
 
 $$
-f(c_i, h) \rightarrow {\text{support}, \text{not_support}}
+f(c_i, h) \to \{\text{support}, \text{not\_support}\}
 $$
 
 Each evidence unit stores:
