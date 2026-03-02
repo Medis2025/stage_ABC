@@ -16,7 +16,7 @@ The pipeline is organized into three sequential stages:
 
 The overall data flow is:
 
-[
+$$
 \text{HPO Terms}
 \rightarrow
 \text{Literature Evidence}
@@ -26,7 +26,7 @@ The overall data flow is:
 \text{Cluster Topology}
 \rightarrow
 \text{Structured Training Corpus}
-]
+$$
 
 The design principle is to stabilize semantic structure before generating supervision, thereby reducing noise amplification and synthetic bias.
 
@@ -42,7 +42,7 @@ Construct phenotype-specific evidence pools grounded in biomedical literature us
 
 ## 2.2 Input
 
-For each phenotype ( h ):
+For each phenotype $ h $:
 
 * HPO ID
 * Canonical name
@@ -56,9 +56,9 @@ For each phenotype ( h ):
 
 Generate a multi-scale query set:
 
-[
+$$
 Q_h = { q_1, q_2, ..., q_k }
-]
+$$
 
 Query strategies include:
 
@@ -73,9 +73,9 @@ Query strategies include:
 
 Using PubMed and PMC APIs:
 
-[
+$$
 D_h = \text{Retrieve}(Q_h)
-]
+$$
 
 Documents include:
 
@@ -90,9 +90,9 @@ Documents include:
 
 From each document:
 
-[
+$$
 C_h = { c_1, c_2, ..., c_n }
-]
+$$
 
 Extraction strategies:
 
@@ -106,9 +106,9 @@ Extraction strategies:
 
 Each candidate span is evaluated via an LLM-based support classifier:
 
-[
+$$
 f(c_i, h) \rightarrow {\text{support}, \text{not_support}}
-]
+$$
 
 Each evidence unit stores:
 
@@ -123,11 +123,11 @@ Each evidence unit stores:
 
 A structured evidence pool:
 
-[
+$$
 \mathcal{E} = { E_{h_1}, E_{h_2}, ..., E_{h_N} }
-]
+$$
 
-Each ( E_h ) contains validated, phenotype-specific evidence spans.
+Each $ E_h $ contains validated, phenotype-specific evidence spans.
 
 This stage ensures literature grounding before representation learning.
 
@@ -156,13 +156,13 @@ Evidence may be partitioned into categories:
 
 Each evidence span is encoded:
 
-[
+$$
 \mathbf{e}_i = \text{Encoder}(e_i)
-]
+$$
 
 Pooling per phenotype:
 
-[
+$$
 \mathbf{v}_h =
 \text{Fuse}\Big(
 \text{Pool}(E_h^{def}),
@@ -170,13 +170,13 @@ Pooling per phenotype:
 \text{Pool}(E_h^{medium}),
 \text{Pool}(E_h^{weak})
 \Big)
-]
+$$
 
 Result:
 
-[
+$$
 \mathbf{v}_h \in \mathbb{R}^d
-]
+$$
 
 ---
 
@@ -184,11 +184,11 @@ Result:
 
 Cosine similarity:
 
-[
+$$
 \text{sim}(h_i, h_j) =
 \frac{\mathbf{v}*{h_i} \cdot \mathbf{v}*{h_j}}
 {|\mathbf{v}*{h_i}| |\mathbf{v}*{h_j}|}
-]
+$$
 
 ---
 
@@ -206,9 +206,9 @@ Using HNSW indexing:
 
 Cluster phenotype embeddings:
 
-[
+$$
 \mathcal{C} = { C_1, C_2, ..., C_K }
-]
+$$
 
 Cluster assignments can be frozen for downstream sampling.
 
@@ -216,7 +216,7 @@ Cluster assignments can be frozen for downstream sampling.
 
 ## 3.7 Output of Stage 2
 
-* Embedding matrix ( V \in \mathbb{R}^{N \times d} )
+* Embedding matrix $ V \in \mathbb{R}^{N \times d} $
 * kNN adjacency structure
 * Cluster assignments
 * Frozen semantic topology
@@ -235,15 +235,15 @@ Generate structured, weakly supervised training corpora guided by the semantic t
 
 ## 4.2 Cluster-Aware Phenotype Set Sampling
 
-For a seed phenotype ( h_s ):
+For a seed phenotype $ h_s $:
 
 1. Sample same-cluster phenotypes.
 2. Sample cross-cluster phenotypes.
 3. Construct phenotype sets:
 
-[
+$$
 S = { h_s, h_{i_1}, ..., h_{i_k} }
-]
+$$
 
 This balances semantic coherence and diversity.
 
@@ -251,13 +251,13 @@ This balances semantic coherence and diversity.
 
 ## 4.3 LLM-Based Clinical Narrative Generation
 
-Given phenotype set ( S ):
+Given phenotype set $ S $:
 
-[
+$$
 g(S) \rightarrow x
-]
+$$
 
-Where ( x ) is a clinical-style narrative describing co-occurring phenotypes.
+Where $ x $ is a clinical-style narrative describing co-occurring phenotypes.
 
 ---
 
@@ -278,9 +278,9 @@ These constraints enforce semantic fidelity and reduce hallucination.
 
 A structured corpus:
 
-[
+$$
 \mathcal{T} = { (x_j, S_j) }
-]
+$$
 
 Each item contains:
 
@@ -320,7 +320,7 @@ This reduces:
 
 The pipeline constructs a structured semantic transformation:
 
-[
+$$
 \text{Ontology}
 \rightarrow
 \text{Evidence Graph}
@@ -328,7 +328,7 @@ The pipeline constructs a structured semantic transformation:
 \text{Semantic Manifold}
 \rightarrow
 \text{Supervised Corpus}
-]
+$$
 
 Rather than training directly on noisy span-label pairs, it first stabilizes the phenotype representation geometry, then derives supervision from structural properties of that geometry.
 
@@ -356,12 +356,12 @@ The HPO-MoRE Candidate Pipeline consists of:
 
 Together, they form a closed semantic construction loop:
 
-[
+$$
 \text{HPO} \rightarrow
 \text{Evidence} \rightarrow
 \text{Representation} \rightarrow
 \text{Topology} \rightarrow
 \text{Supervision}
-]
+$$
 
 This enables scalable, weakly supervised phenotype modeling grounded in biomedical literature.
