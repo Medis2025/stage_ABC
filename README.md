@@ -107,7 +107,7 @@ Extraction strategies:
 Each candidate span is evaluated via an LLM-based support classifier:
 
 $$
-f(c_i, h) \to \{\text{support}, \text{not\_support}\}
+f(c_i, h) \to \{\text{support}, \text{not-support}\}
 $$
 
 Each evidence unit stores:
