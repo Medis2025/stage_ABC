@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Stage4 graph_edges.jsonl row",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["edge_id", "source_id", "target_id", "edge_layer", "edge_type", "score", "metadata"],
+  "properties": {
+    "edge_id": {"type": "string"},
+    "source_id": {"type": "string"},
+    "target_id": {"type": "string"},
+    "edge_layer": {"enum": ["ontology", "semantic", "evidence"]},
+    "edge_type": {"type": "string"},
+    "score": {"type": ["number", "null"]},
+    "metadata": {"type": "object"}
+  }
+}

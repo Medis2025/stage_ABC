@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "created_at": "2026-05-07T03:14:09Z",
+  "data_dir": "E:\\HPO_MoRE\\stage_ABC\\Candidate\\STAGE4\\out\\pilot_hpo_s3r_data",
+  "validation": {
+    "referential_integrity_passed": true,
+    "offset_validation_passed": true,
+    "data_quality_passed": true,
+    "report_path": "validation/quality_gate_report.json"
+  }
+}

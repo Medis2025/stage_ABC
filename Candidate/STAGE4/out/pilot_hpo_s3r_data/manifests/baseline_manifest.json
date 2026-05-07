@@ -1,0 +1,18 @@
+{
+  "created_at": "2026-05-07T03:13:27Z",
+  "source": "stage4_pilot_export",
+  "config_path": "E:\\HPO_MoRE\\stage_ABC\\Candidate\\STAGE4\\configs\\pilot_export.json",
+  "notes": [
+    "Tiny deterministic Stage 4 pilot for S3R data contract validation.",
+    "Rows are synthetic and intended for exporter/validator smoke tests only."
+  ],
+  "stage_versions": {
+    "stage1_query": "pilot",
+    "stage2_topology": "pilot",
+    "stage3_phaseA": "pilot",
+    "stage3_phaseB1": "pilot",
+    "stage3_phaseB2": "pilot",
+    "stage3_phaseB3": "pilot",
+    "stage4_export": "v1.0.0-pilot"
+  }
+}

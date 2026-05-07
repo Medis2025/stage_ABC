@@ -1,0 +1,71 @@
+{
+  "data_version": "s3r_data_v1.0-pilot",
+  "creator": "stage4_pilot_export",
+  "split_version": "pilot_v1.0",
+  "stage_versions": {
+    "stage1_query": "pilot",
+    "stage2_topology": "pilot",
+    "stage3_phaseA": "pilot",
+    "stage3_phaseB1": "pilot",
+    "stage3_phaseB2": "pilot",
+    "stage3_phaseB3": "pilot",
+    "stage4_export": "v1.0.0-pilot"
+  },
+  "ontology_version": {
+    "hpo_release": "pilot",
+    "definition_source": "synthetic_pilot"
+  },
+  "model_versions": {
+    "embedder": {
+      "name": "Qwen3-Embedding-8B",
+      "version": "api_smoke_20260507"
+    },
+    "generator_model": {
+      "name": "manual_pilot",
+      "version": "v1"
+    }
+  },
+  "notes": [
+    "Tiny deterministic Stage 4 pilot for S3R data contract validation.",
+    "Rows are synthetic and intended for exporter/validator smoke tests only."
+  ],
+  "processed": {
+    "nodes": [
+      {"node_id":"HP:0001250","node_type":"hpo_term","name":"Seizure","definition":"An intermittent abnormality of nervous system physiology characterized by transient occurrence of signs or symptoms due to abnormal excessive or synchronous neuronal activity.","synonyms":["Convulsion","Seizures","Epileptic seizure"],"parents":["HP:0012638"],"children":[],"embedding_text":"Seizure. An intermittent abnormality of nervous system physiology. Synonyms: Convulsion, Seizures, Epileptic seizure.","evidence_count":2,"tier":"sparse","uses_parent_evidence":false,"inherited_from":null,"ontology_subtree":"HP:0000707","depth_in_ontology":3,"version_info":{"hpo_release":"pilot","definition_source":"synthetic_pilot"}},
+      {"node_id":"HP:0001252","node_type":"hpo_term","name":"Muscular hypotonia","definition":"Reduced muscle tone.","synonyms":["Hypotonia","Low muscle tone"],"parents":["HP:0012638"],"children":[],"embedding_text":"Muscular hypotonia. Reduced muscle tone. Synonyms: Hypotonia, Low muscle tone.","evidence_count":1,"tier":"sparse","uses_parent_evidence":false,"inherited_from":null,"ontology_subtree":"HP:0000707","depth_in_ontology":3,"version_info":{"hpo_release":"pilot","definition_source":"synthetic_pilot"}},
+      {"node_id":"HP:0004322","node_type":"hpo_term","name":"Short stature","definition":"A height below that which is expected according to age and sex norms.","synonyms":["Decreased body height"],"parents":["HP:0001507"],"children":[],"embedding_text":"Short stature. A height below expected age and sex norms. Synonyms: Decreased body height.","evidence_count":1,"tier":"sparse","uses_parent_evidence":false,"inherited_from":null,"ontology_subtree":"HP:0001507","depth_in_ontology":3,"version_info":{"hpo_release":"pilot","definition_source":"synthetic_pilot"}},
+      {"node_id":"HP:0002014","node_type":"hpo_term","name":"Diarrhea","definition":"Abnormally frequent loose or watery stools.","synonyms":["Loose stools"],"parents":["HP:0012719"],"children":[],"embedding_text":"Diarrhea. Abnormally frequent loose or watery stools. Synonyms: Loose stools.","evidence_count":1,"tier":"sparse","uses_parent_evidence":false,"inherited_from":null,"ontology_subtree":"HP:0025031","depth_in_ontology":3,"version_info":{"hpo_release":"pilot","definition_source":"synthetic_pilot"}},
+      {"node_id":"HP:0012638","node_type":"hpo_term","name":"Abnormal nervous system physiology","definition":"A functional abnormality of the nervous system.","synonyms":[],"parents":[],"children":["HP:0001250","HP:0001252"],"embedding_text":"Abnormal nervous system physiology. A functional abnormality of the nervous system.","evidence_count":20,"tier":"well_supported","uses_parent_evidence":false,"inherited_from":null,"ontology_subtree":"HP:0000707","depth_in_ontology":2,"version_info":{"hpo_release":"pilot","definition_source":"synthetic_pilot"}},
+      {"node_id":"HP:0001507","node_type":"hpo_term","name":"Growth abnormality","definition":"An abnormality of growth.","synonyms":[],"parents":[],"children":["HP:0004322"],"embedding_text":"Growth abnormality. An abnormality of growth.","evidence_count":20,"tier":"well_supported","uses_parent_evidence":false,"inherited_from":null,"ontology_subtree":"HP:0001507","depth_in_ontology":2,"version_info":{"hpo_release":"pilot","definition_source":"synthetic_pilot"}}
+    ],
+    "evidence_chunks": [
+      {"evidence_id":"PMID_90000001_chunk_0001","source_id":"PMID:90000001","pmcid":null,"section":"abstract","style":"clinical_note","style_source":"synthetic","text":"The patient experienced seizures and muscle weakness.","char_length":53,"linked_hpo":["HP:0001250"],"span_offsets":[{"start":24,"end":32,"text":"seizures","hpo_id":"HP:0001250","extraction_method":"synthetic_pilot","confidence_score":0.95,"confidence_tier":"high","tier_source":"rule_based"}],"evidence_level":"synthetic_grounded","split":"train","split_strategy":"by_pmid_hash","extraction_provenance":{"stage":"stage4_pilot","filter_models":[],"agreement_level":"synthetic","validated_by_linker":"none"}},
+      {"evidence_id":"PMID_90000002_chunk_0001","source_id":"PMID:90000002","pmcid":null,"section":"abstract","style":"case_report","style_source":"synthetic","text":"Patient presented with chronic diarrhea and short stature.","char_length":58,"linked_hpo":["HP:0002014","HP:0004322"],"span_offsets":[{"start":31,"end":39,"text":"diarrhea","hpo_id":"HP:0002014","extraction_method":"synthetic_pilot","confidence_score":0.95,"confidence_tier":"high","tier_source":"rule_based"},{"start":44,"end":57,"text":"short stature","hpo_id":"HP:0004322","extraction_method":"synthetic_pilot","confidence_score":0.95,"confidence_tier":"high","tier_source":"rule_based"}],"evidence_level":"synthetic_grounded","split":"train","split_strategy":"by_pmid_hash","extraction_provenance":{"stage":"stage4_pilot","filter_models":[],"agreement_level":"synthetic","validated_by_linker":"none"}}
+    ],
+    "span_supervision": [
+      {"sample_id":"s1_pilot_0001","source_evidence_id":"PMID_90000001_chunk_0001","text":"The patient experienced seizures and muscle weakness.","char_length":53,"spans":[{"start":24,"end":32,"text":"seizures","label":"HP:0001250","span_type":"phenotype","confidence_tier":"high","expression_type":"synonym","source":"synthetic_pilot"}],"style":"clinical_note","split":"train","metadata":{"generator_model":"manual_pilot","prompt_version":"stage4_pilot","tokens":null,"bioes_tags":null}},
+      {"sample_id":"s1_pilot_0002","source_evidence_id":"PMID_90000002_chunk_0001","text":"Patient presented with chronic diarrhea and short stature.","char_length":58,"spans":[{"start":31,"end":39,"text":"diarrhea","label":"HP:0002014","span_type":"phenotype","confidence_tier":"high","expression_type":"explicit","source":"synthetic_pilot"},{"start":44,"end":57,"text":"short stature","label":"HP:0004322","span_type":"phenotype","confidence_tier":"high","expression_type":"explicit","source":"synthetic_pilot"}],"style":"case_report","split":"train","metadata":{"generator_model":"manual_pilot","prompt_version":"stage4_pilot","tokens":null,"bioes_tags":null}}
+    ],
+    "retrieval_pairs": [
+      {"sample_id":"s2_pilot_0001","source_evidence_id":"PMID_90000001_chunk_0001","query_span":"seizures","span_start_in_context":24,"span_end_in_context":32,"query_context":"The patient experienced seizures and muscle weakness.","encoding_mode_hint":"span_with_context","positive_node_id":"HP:0001250","positive_text":"Seizure. An intermittent abnormality of nervous system physiology. Synonyms: Convulsion, Seizures, Epileptic seizure.","positive_evidence_ids":["PMID_90000001_chunk_0001"],"hard_negatives":[{"node_id":"HP:0001252","negative_type":"ontology_sibling","ontology_distance":2},{"node_id":"HP:0012638","negative_type":"ontology_parent","ontology_distance":1},{"node_id":"HP:0001250","negative_type":"ontology_child","ontology_distance":1},{"node_id":"HP:0002014","negative_type":"embedding_neighbor","ontology_distance":5,"embedding_similarity":0.51},{"node_id":"HP:0004322","negative_type":"random","ontology_distance":8}],"confidence_tier":"high","split":"train"},
+      {"sample_id":"s2_pilot_0002","source_evidence_id":"PMID_90000002_chunk_0001","query_span":"short stature","span_start_in_context":44,"span_end_in_context":57,"query_context":"Patient presented with chronic diarrhea and short stature.","encoding_mode_hint":"span_with_context","positive_node_id":"HP:0004322","positive_text":"Short stature. A height below expected age and sex norms. Synonyms: Decreased body height.","positive_evidence_ids":["PMID_90000002_chunk_0001"],"hard_negatives":[{"node_id":"HP:0001507","negative_type":"ontology_parent","ontology_distance":1},{"node_id":"HP:0002014","negative_type":"embedding_neighbor","ontology_distance":6,"embedding_similarity":0.42},{"node_id":"HP:0001250","negative_type":"random","ontology_distance":8}],"confidence_tier":"high","split":"train"}
+    ],
+    "rerank_pairs": [
+      {"sample_id":"s3_pilot_0001","source_evidence_id":"PMID_90000001_chunk_0001","query":"The patient experienced seizures and muscle weakness.","span":"seizures","span_start":24,"span_end":32,"candidate_node_id":"HP:0001250","candidate_name":"Seizure","candidate_definition":"An intermittent abnormality of nervous system physiology characterized by transient occurrence of signs or symptoms due to abnormal excessive or synchronous neuronal activity.","candidate_synonyms":["Convulsion","Seizures","Epileptic seizure"],"evidence_ids":["PMID_90000001_chunk_0001"],"graph_features":{"is_neighbor":true,"ontology_distance_to_query_concept":0,"embedding_similarity":0.96,"co_mention_count":1,"is_in_retriever_top_k":true,"retriever_rank":1},"label":1,"negative_type":null,"reason":"The span directly denotes seizure activity.","confidence_tier":"high","split":"train"},
+      {"sample_id":"s3_pilot_0002","source_evidence_id":"PMID_90000001_chunk_0001","query":"The patient experienced seizures and muscle weakness.","span":"seizures","span_start":24,"span_end":32,"candidate_node_id":"HP:0001252","candidate_name":"Muscular hypotonia","candidate_definition":"Reduced muscle tone.","candidate_synonyms":["Hypotonia","Low muscle tone"],"evidence_ids":[],"graph_features":{"is_neighbor":true,"ontology_distance_to_query_concept":2,"embedding_similarity":0.49,"co_mention_count":0,"is_in_retriever_top_k":true,"retriever_rank":3},"label":0,"negative_type":"ontology_sibling_wrong","reason":"Muscular hypotonia is reduced muscle tone, not seizure activity.","confidence_tier":"high","split":"train"}
+    ],
+    "abstention_samples": [
+      {"sample_id":"abs_pilot_0001","source_evidence_id":"synthetic_abstention_0001","text":"The patient was treated with valproate at 20 mg/kg/day.","span":"valproate","span_start":29,"span_end":38,"candidate_node_ids":["HP:0001250","HP:0001252","HP:0002014"],"candidate_top_k_source":"manual_pilot","expected_label":"abstain","abstention_reason":"span_is_not_phenotype","construction_method":"synthetic_drug_injection","confidence_tier":"high","split":"train"},
+      {"sample_id":"abs_pilot_0002","source_evidence_id":"synthetic_abstention_0002","text":"The child had episodes but all retrieved candidates were unrelated.","span":"episodes","span_start":14,"span_end":22,"candidate_node_ids":["HP:0002014","HP:0004322"],"candidate_top_k_source":"manual_pilot","expected_label":"abstain","abstention_reason":"phenotype_but_all_candidates_wrong","construction_method":"synthetic_wrong_candidate_set","confidence_tier":"high","split":"train"},
+      {"sample_id":"abs_pilot_0003","source_evidence_id":"synthetic_abstention_0003","text":"The report noted recurrent seizures during sleep.","span":"recurrent","span_start":17,"span_end":26,"candidate_node_ids":["HP:0001250","HP:0001252"],"candidate_top_k_source":"manual_pilot","expected_label":"abstain","abstention_reason":"ambiguous_or_incomplete_span","construction_method":"synthetic_boundary_truncation","confidence_tier":"high","split":"train"},
+      {"sample_id":"abs_pilot_0004","source_evidence_id":"synthetic_abstention_0004","text":"The family denied seizures during the admission.","span":"seizures","span_start":18,"span_end":26,"candidate_node_ids":["HP:0001250","HP:0001252"],"candidate_top_k_source":"manual_pilot","expected_label":"abstain","abstention_reason":"negated_phenotype","construction_method":"synthetic_negation","confidence_tier":"high","split":"train"}
+    ],
+    "graph_edges": [
+      {"edge_id":"edge_pilot_0001","source_id":"HP:0001250","target_id":"HP:0012638","edge_layer":"ontology","edge_type":"is_a","score":null,"metadata":{"source":"synthetic_pilot","hpo_release":"pilot"}},
+      {"edge_id":"edge_pilot_0002","source_id":"HP:0012638","target_id":"HP:0001250","edge_layer":"ontology","edge_type":"parent_of","score":null,"metadata":{"source":"synthetic_pilot","hpo_release":"pilot"}},
+      {"edge_id":"edge_pilot_0003","source_id":"HP:0001250","target_id":"HP:0001252","edge_layer":"ontology","edge_type":"sibling_of","score":null,"metadata":{"source":"synthetic_pilot","hpo_release":"pilot"}},
+      {"edge_id":"edge_pilot_0004","source_id":"HP:0001250","target_id":"HP:0002014","edge_layer":"semantic","edge_type":"kNN","score":0.5118,"metadata":{"source":"qwen3_embedding_smoke","dimension":128}},
+      {"edge_id":"edge_pilot_0005","source_id":"HP:0002014","target_id":"HP:0004322","edge_layer":"evidence","edge_type":"evidence_supports","score":1.0,"metadata":{"source":"PMID_90000002_chunk_0001"}}
+    ]
+  }
+}

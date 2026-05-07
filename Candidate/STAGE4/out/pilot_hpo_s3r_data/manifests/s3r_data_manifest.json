@@ -1,0 +1,72 @@
+{
+  "data_version": "s3r_data_v1.0-pilot",
+  "created_at": "2026-05-07T03:14:09Z",
+  "creator": "stage4_pilot_export",
+  "stage_versions": {
+    "stage1_query": "pilot",
+    "stage2_topology": "pilot",
+    "stage3_phaseA": "pilot",
+    "stage3_phaseB1": "pilot",
+    "stage3_phaseB2": "pilot",
+    "stage3_phaseB3": "pilot",
+    "stage4_export": "v1.0.0-pilot"
+  },
+  "ontology_version": {
+    "hpo_release": "pilot",
+    "definition_source": "synthetic_pilot"
+  },
+  "model_versions": {
+    "embedder": {
+      "name": "Qwen3-Embedding-8B",
+      "version": "api_smoke_20260507"
+    },
+    "generator_model": {
+      "name": "manual_pilot",
+      "version": "v1"
+    }
+  },
+  "file_checksums": {
+    "nodes.jsonl": "sha256:985cf4a5e1cdbdb02af3b27eab9e4e68cf3218360c34cc4b64101251ffec5000",
+    "evidence_chunks.jsonl": "sha256:011dbdaa364e342c5d30558aa1cc646d14721d3a2490f59c49b0c2b00e9f20d6",
+    "span_supervision.jsonl": "sha256:4ccf2294a64b38110279df3afda14c4f2a678040012f518577532ced81317825",
+    "retrieval_pairs.jsonl": "sha256:e5e5f69cd25c88e6004bcf1e457b2ec147c3e4df9d80405ed856839a758d4683",
+    "rerank_pairs.jsonl": "sha256:c3fe3bbdff94ece9885e1fe623498b41fbdf9f08851ae4936bc5256e2ff71af5",
+    "abstention_samples.jsonl": "sha256:eaf233e421b022dd2b020a11e4ae3be6ce96498e73bc060754ef6d3dbdb04900",
+    "graph_edges.jsonl": "sha256:6112ea404c9c02c272e135a7dcc99b4ad9218df1f8e4810dfa38af1222ef0335"
+  },
+  "stats": {
+    "n_nodes": 6,
+    "n_evidence_chunks": 2,
+    "n_span_supervision": 2,
+    "n_retrieval_pairs": 2,
+    "n_rerank_pairs": 2,
+    "n_abstention_samples": 4,
+    "n_graph_edges": 5,
+    "n_nodes_by_tier": {
+      "sparse": 4,
+      "well_supported": 2
+    },
+    "n_evidence_by_style": {
+      "clinical_note": 1,
+      "case_report": 1
+    },
+    "n_implicit_expression": 0,
+    "abstention_reason_distribution": {
+      "span_is_not_phenotype": 1,
+      "phenotype_but_all_candidates_wrong": 1,
+      "ambiguous_or_incomplete_span": 1,
+      "negated_phenotype": 1
+    },
+    "graph_edges_by_layer": {
+      "ontology": 3,
+      "semantic": 1,
+      "evidence": 1
+    }
+  },
+  "validation": {
+    "referential_integrity_passed": true,
+    "offset_validation_passed": true,
+    "data_quality_passed": true,
+    "report_path": "validation/quality_gate_report.json"
+  }
+}

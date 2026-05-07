@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Stage4 span_supervision.jsonl row",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["sample_id", "source_evidence_id", "text", "char_length", "spans", "style", "split", "metadata"],
+  "properties": {
+    "sample_id": {"type": "string"},
+    "source_evidence_id": {"type": "string"},
+    "text": {"type": "string"},
+    "char_length": {"type": "integer", "minimum": 0},
+    "spans": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["start", "end", "text", "label", "span_type", "confidence_tier", "expression_type", "source"],
+        "properties": {
+          "start": {"type": "integer", "minimum": 0},
+          "end": {"type": "integer", "minimum": 0},
+          "text": {"type": "string"},
+          "label": {"type": "string"},
+          "span_type": {"enum": ["phenotype", "non_phenotype_distractor"]},
+          "confidence_tier": {"enum": ["high", "medium", "weak"]},
+          "expression_type": {"enum": ["explicit", "implicit", "synonym"]},
+          "source": {"type": "string"}
+        }
+      }
+    },
+    "style": {"enum": ["case_report", "abstract", "clinical_note", "review", "patient_narrative"]},
+    "split": {"enum": ["train", "dev", "test", "long_tail_eval"]},
+    "metadata": {"type": "object"}
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Stage4 retrieval_pairs.jsonl row",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "sample_id",
+    "source_evidence_id",
+    "query_span",
+    "span_start_in_context",
+    "span_end_in_context",
+    "query_context",
+    "encoding_mode_hint",
+    "positive_node_id",
+    "positive_text",
+    "positive_evidence_ids",
+    "hard_negatives",
+    "confidence_tier",
+    "split"
+  ],
+  "properties": {
+    "sample_id": {"type": "string"},
+    "source_evidence_id": {"type": "string"},
+    "query_span": {"type": "string"},
+    "span_start_in_context": {"type": "integer", "minimum": 0},
+    "span_end_in_context": {"type": "integer", "minimum": 0},
+    "query_context": {"type": "string"},
+    "encoding_mode_hint": {"enum": ["span_only", "context_only", "span_with_context"]},
+    "positive_node_id": {"type": "string"},
+    "positive_text": {"type": "string"},
+    "positive_evidence_ids": {"type": "array", "items": {"type": "string"}},
+    "hard_negatives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["node_id", "negative_type"],
+        "properties": {
+          "node_id": {"type": "string"},
+          "negative_type": {"enum": ["ontology_sibling", "ontology_parent", "ontology_child", "embedding_neighbor", "random"]},
+          "ontology_distance": {"type": ["integer", "null"]},
+          "embedding_similarity": {"type": ["number", "null"]}
+        }
+      }
+    },
+    "confidence_tier": {"enum": ["high", "medium", "weak"]},
+    "split": {"enum": ["train", "dev", "test", "long_tail_eval"]}
+  }
+}

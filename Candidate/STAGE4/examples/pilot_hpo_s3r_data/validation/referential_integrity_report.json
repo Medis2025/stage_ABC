@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "errors": [],
+  "stats": {
+    "total_references_checked": 49,
+    "broken_references": 0,
+    "n_nodes": 6,
+    "n_evidence_chunks": 2
+  }
+}

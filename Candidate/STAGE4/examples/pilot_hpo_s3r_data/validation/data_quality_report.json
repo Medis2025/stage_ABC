@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "checks": {
+    "referential_integrity_passed": true,
+    "offset_validation_passed": true
+  },
+  "stats": {
+    "total_references_checked": 49,
+    "broken_references": 0,
+    "n_nodes": 6,
+    "n_evidence_chunks": 2,
+    "total_offsets_checked": 11,
+    "offset_errors": 0
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "errors": [],
+  "warnings": [],
+  "checks": {
+    "required_files_nonempty": true,
+    "retrieval_negative_type_coverage": true,
+    "abstention_reason_coverage": true,
+    "manifest_checksums_match": true
+  },
+  "stats": {
+    "n_nodes": 6,
+    "n_evidence_chunks": 2,
+    "n_span_supervision": 2,
+    "n_retrieval_pairs": 2,
+    "n_rerank_pairs": 2,
+    "n_abstention_samples": 4,
+    "n_graph_edges": 5,
+    "n_nodes_by_tier": {
+      "sparse": 4,
+      "well_supported": 2
+    },
+    "n_evidence_by_style": {
+      "clinical_note": 1,
+      "case_report": 1
+    },
+    "n_implicit_expression": 0,
+    "abstention_reason_distribution": {
+      "span_is_not_phenotype": 1,
+      "phenotype_but_all_candidates_wrong": 1,
+      "ambiguous_or_incomplete_span": 1,
+      "negated_phenotype": 1
+    },
+    "graph_edges_by_layer": {
+      "ontology": 3,
+      "semantic": 1,
+      "evidence": 1
+    }
+  }
+}

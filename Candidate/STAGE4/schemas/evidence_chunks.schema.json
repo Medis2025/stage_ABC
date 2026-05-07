@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Stage4 evidence_chunks.jsonl row",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "evidence_id",
+    "source_id",
+    "pmcid",
+    "section",
+    "style",
+    "style_source",
+    "text",
+    "char_length",
+    "linked_hpo",
+    "span_offsets",
+    "evidence_level",
+    "split",
+    "split_strategy",
+    "extraction_provenance"
+  ],
+  "properties": {
+    "evidence_id": {"type": "string"},
+    "source_id": {"type": "string"},
+    "pmcid": {"type": ["string", "null"]},
+    "section": {"type": "string"},
+    "style": {"enum": ["case_report", "abstract", "clinical_note", "review", "patient_narrative"]},
+    "style_source": {"enum": ["real_pubmed", "real_emr", "synthetic"]},
+    "text": {"type": "string"},
+    "char_length": {"type": "integer", "minimum": 0},
+    "linked_hpo": {"type": "array", "items": {"type": "string"}},
+    "span_offsets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["start", "end", "text", "hpo_id", "extraction_method", "confidence_score", "confidence_tier", "tier_source"],
+        "properties": {
+          "start": {"type": "integer", "minimum": 0},
+          "end": {"type": "integer", "minimum": 0},
+          "text": {"type": "string"},
+          "hpo_id": {"type": "string"},
+          "extraction_method": {"type": "string"},
+          "confidence_score": {"type": "number", "minimum": 0, "maximum": 1},
+          "confidence_tier": {"enum": ["high", "medium", "weak"]},
+          "tier_source": {
+            "enum": [
+              "multi_model_unanimous",
+              "multi_model_majority",
+              "multi_model_agreement+linker_validated",
+              "single_model+linker_validated",
+              "single_model_only",
+              "rule_based"
+            ]
+          }
+        }
+      }
+    },
+    "evidence_level": {"enum": ["abstract_only", "pmc_full_text", "synthetic_grounded"]},
+    "split": {"enum": ["train", "dev", "test", "long_tail_eval"]},
+    "split_strategy": {"enum": ["by_pmid_hash", "by_subtree", "by_tier"]},
+    "extraction_provenance": {"type": "object"}
+  }
+}

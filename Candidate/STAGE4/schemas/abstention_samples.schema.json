@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Stage4 abstention_samples.jsonl row",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "sample_id",
+    "source_evidence_id",
+    "text",
+    "span",
+    "span_start",
+    "span_end",
+    "candidate_node_ids",
+    "candidate_top_k_source",
+    "expected_label",
+    "abstention_reason",
+    "construction_method",
+    "confidence_tier",
+    "split"
+  ],
+  "properties": {
+    "sample_id": {"type": "string"},
+    "source_evidence_id": {"type": "string"},
+    "text": {"type": "string"},
+    "span": {"type": "string"},
+    "span_start": {"type": "integer", "minimum": 0},
+    "span_end": {"type": "integer", "minimum": 0},
+    "candidate_node_ids": {"type": "array", "items": {"type": "string"}},
+    "candidate_top_k_source": {"type": "string"},
+    "expected_label": {"enum": ["abstain"]},
+    "abstention_reason": {"enum": ["span_is_not_phenotype", "phenotype_but_all_candidates_wrong", "ambiguous_or_incomplete_span", "negated_phenotype"]},
+    "construction_method": {"type": "string"},
+    "confidence_tier": {"enum": ["high", "medium", "weak"]},
+    "split": {"enum": ["train", "dev", "test", "long_tail_eval"]}
+  }
+}

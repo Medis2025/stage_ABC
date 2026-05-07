@@ -1,0 +1,32 @@
+{
+  "split_version": "pilot_v1.0",
+  "main_split": {
+    "strategy": "by_pmid_hash",
+    "seed": 42,
+    "ratios": {
+      "train": 1.0,
+      "dev": 0.0,
+      "test": 0.0
+    }
+  },
+  "special_evals": [],
+  "stats_per_file": {
+    "nodes.jsonl": {},
+    "evidence_chunks.jsonl": {
+      "train": 2
+    },
+    "span_supervision.jsonl": {
+      "train": 2
+    },
+    "retrieval_pairs.jsonl": {
+      "train": 2
+    },
+    "rerank_pairs.jsonl": {
+      "train": 2
+    },
+    "abstention_samples.jsonl": {
+      "train": 4
+    },
+    "graph_edges.jsonl": {}
+  }
+}

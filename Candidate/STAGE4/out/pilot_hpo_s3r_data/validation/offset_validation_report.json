@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "errors": [],
+  "stats": {
+    "total_offsets_checked": 14,
+    "offset_errors": 0
+  }
+}

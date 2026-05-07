@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Stage4 nodes.jsonl row",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "node_id",
+    "node_type",
+    "name",
+    "definition",
+    "synonyms",
+    "parents",
+    "children",
+    "embedding_text",
+    "evidence_count",
+    "tier",
+    "uses_parent_evidence",
+    "inherited_from",
+    "ontology_subtree",
+    "depth_in_ontology",
+    "version_info"
+  ],
+  "properties": {
+    "node_id": {"type": "string", "pattern": "^HP:[0-9]{7}$"},
+    "node_type": {"type": "string"},
+    "name": {"type": "string"},
+    "definition": {"type": "string"},
+    "synonyms": {"type": "array", "items": {"type": "string"}},
+    "parents": {"type": "array", "items": {"type": "string"}},
+    "children": {"type": "array", "items": {"type": "string"}},
+    "embedding_text": {"type": "string"},
+    "evidence_count": {"type": "integer", "minimum": 0},
+    "tier": {"enum": ["well_supported", "medium", "sparse", "parent_inherited"]},
+    "uses_parent_evidence": {"type": "boolean"},
+    "inherited_from": {"type": ["string", "null"]},
+    "ontology_subtree": {"type": "string"},
+    "depth_in_ontology": {"type": "integer", "minimum": 0},
+    "version_info": {"type": "object"}
+  }
+}

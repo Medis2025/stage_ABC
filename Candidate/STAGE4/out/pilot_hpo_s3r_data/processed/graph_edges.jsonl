@@ -1,0 +1,5 @@
+{"edge_id":"edge_pilot_0001","source_id":"HP:0001250","target_id":"HP:0012638","edge_layer":"ontology","edge_type":"is_a","score":null,"metadata":{"source":"synthetic_pilot","hpo_release":"pilot"}}
+{"edge_id":"edge_pilot_0002","source_id":"HP:0012638","target_id":"HP:0001250","edge_layer":"ontology","edge_type":"parent_of","score":null,"metadata":{"source":"synthetic_pilot","hpo_release":"pilot"}}
+{"edge_id":"edge_pilot_0003","source_id":"HP:0001250","target_id":"HP:0001252","edge_layer":"ontology","edge_type":"sibling_of","score":null,"metadata":{"source":"synthetic_pilot","hpo_release":"pilot"}}
+{"edge_id":"edge_pilot_0004","source_id":"HP:0001250","target_id":"HP:0002014","edge_layer":"semantic","edge_type":"kNN","score":0.5118,"metadata":{"source":"qwen3_embedding_smoke","dimension":128}}
+{"edge_id":"edge_pilot_0005","source_id":"HP:0002014","target_id":"HP:0004322","edge_layer":"evidence","edge_type":"evidence_supports","score":1.0,"metadata":{"source":"PMID_90000002_chunk_0001"}}
